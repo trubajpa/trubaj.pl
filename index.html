@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>trubaj.pl</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f4f6fb, #e8ecf7);
+      color: #1f2937;
+    }
+    .card {
+      width: min(420px, calc(100% - 32px));
+      background: white;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.12);
+      text-align: center;
+    }
+    h1 { margin: 0 0 10px; }
+    p { color: #6b7280; }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px 16px;
+      margin: 18px 0 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 14px 16px;
+      border: 0;
+      border-radius: 12px;
+      background: #4f46e5;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .error { color: #dc2626; min-height: 24px; }
+    .welcome { display: none; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <section id="login">
+      <h1>trubaj.pl</h1>
+      <p>Podaj hasło, aby wejść na stronę.</p>
+      <input id="password" type="password" placeholder="Hasło" autocomplete="current-password" />
+      <button onclick="checkPassword()">Wejdź</button>
+      <p id="error" class="error"></p>
+    </section>
+
+    <section id="welcome" class="welcome">
+      <h1>Witaj na trubaj.pl</h1>
+      <p>To jest strona powitalna dostępna po wpisaniu poprawnego hasła.</p>
+    </section>
+  </main>
+
+  <script>
+    const CORRECT_PASSWORD = "test123";
+
+    function checkPassword() {
+      const value = document.getElementById("password").value;
+      const error = document.getElementById("error");
+
+      if (value === CORRECT_PASSWORD) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("welcome").style.display = "block";
+      } else {
+        error.textContent = "Błędne hasło. Spróbuj ponownie.";
+      }
+    }
+
+    document.getElementById("password").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") checkPassword();
+    });
+  </script>
+</body>
+</html>
